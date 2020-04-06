@@ -45,8 +45,8 @@ def handle_message(event):
     """
     # profile = line_bot_api.get_profile(event.source.user_id)
     # input_text = event.message.text.encode('utf-8')
-    message = TextSendMessage(text="My name is Casper")
     if "name" in event.message.text:
+        message = TextSendMessage(text="My name is Casper")
         replay_message(event,message)
     else:
         message = TextSendMessage(text=event.message.text)
@@ -67,9 +67,22 @@ def push_message(event,text):
         event.source.user_id,
         text)        
 
+@handler.add(MessageEvent, message=StickerMessage)
+def handle_sticker_message(event):
+    # echo sticker
+    print(event.message.package_id, event.message.sticker_id)
+    try:
+        line_bot_api.reply_message(event.reply_token, StickerSendMessage(
+            package_id=event.message.package_id, sticker_id=event.message.sticker_id))
+    except LineBotApiError:
+        line_bot_api.push_message(
+            event.source.user_id, TextSendMessage(text='我沒有這個貼圖QQ'))
+        line_bot_api.push_message(
+            event.source.user_id, StickerSendMessage(package_id=2, sticker_id=154))
+
 @app.route('/')
 def index():
-    return 'Hello World'
+    return 'I woke up!!'
 
      
 if __name__ == "__main__":
