@@ -36,6 +36,13 @@ def callback():
     return 'OK'
 
 
+@handler.add(FollowEvent)
+def handle_follow(event):
+    line_bot_api.push_message(event.source.user_id,
+                              TextSendMessage(text='Hi~ My name is Casper\nNice to meet you！'))
+    line_bot_api.push_message(event.source.user_id,
+                              StickerSendMessage(package_id=1, sticker_id=5))
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     print(event)
