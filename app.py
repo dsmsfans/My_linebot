@@ -48,9 +48,7 @@ def handle_message(event):
     if "name" in event.message.text:
         line_bot_api.reply_message(event.reply_token,TextMessage("Casper"))
  
-@app.route('/')
-def index():
-    return 'Hello World'
+
 
 def replay_message(event,text):
     line_bot_api.reply_message(
@@ -62,6 +60,9 @@ def push_message(event,text):
         event.source.user_id,
         text)        
 
+@app.route('/')
+def index():
+    return 'Hello World'
 
     
 if __name__ == "__main__":
