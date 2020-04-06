@@ -43,11 +43,12 @@ def handle_message(event):
     * TextSendMessage 則是把傳回來的對話改成可以replay or push 的格式
     * 建議讀者可以自行更改(text=event.message.text) 例如改成 (text="Hello World")
     """
+    profile = line_bot_api.get_profile(event.source.user_id)
     input_text = event.message.text.encode('utf-8')
     # message = TextSendMessage(text=event.message.text)
     # replay_message(event,message)
     if input_text == "name":
-        line_bot_api.reply_message(event.reply_token,TextMessage("My name is Casper"))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage("My name is Casper"))
  
 
 
