@@ -74,7 +74,7 @@ def handle_sticker_message(event):
             package_id=event.message.package_id, sticker_id=event.message.sticker_id))
     except LineBotApiError:
         line_bot_api.push_message(
-            event.source.user_id, TextSendMessage(text='我沒有這個貼圖\u0x10007C'))
+            event.source.user_id, TextSendMessage(text='我沒有這個貼圖😭'))
         line_bot_api.push_message(
             event.source.user_id, StickerSendMessage(package_id=2, sticker_id=173))
 
