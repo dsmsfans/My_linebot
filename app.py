@@ -49,7 +49,7 @@ def handle_message(event):
     # replay_message(event,message)
     if input_text == "name":
         message = TextSendMessage(text="My name is Casper")
-        push_message(event,message)
+        replay_message(event,message)
  
 
 
