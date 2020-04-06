@@ -45,10 +45,11 @@ def handle_message(event):
     """
     # profile = line_bot_api.get_profile(event.source.user_id)
     # input_text = event.message.text.encode('utf-8')
-    message = TextSendMessage(text="what")
-    replay_message(event,message)
-    # if input_text == "name":
-    #     line_bot_api.reply_message(event.reply_token,TextSendMessage(text="My name is Casper"))
+    # message = TextSendMessage(text="what")
+    # replay_message(event,message)
+    if input_text == "name":
+        message = TextSendMessage(text="My name is Casper")
+        push_message(event,message)
  
 
 
