@@ -35,14 +35,6 @@ def callback():
 
     return 'OK'
 
-
-@handler.add(FollowEvent)
-def handle_follow(event):
-    line_bot_api.push_message(event.source.user_id,
-                              TextSendMessage(text='Hi~ My name is Casper\nNice to meet you！'))
-    line_bot_api.push_message(event.source.user_id,
-                              StickerSendMessage(package_id=1, sticker_id=5))
-
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     print(event)
@@ -53,8 +45,8 @@ def handle_message(event):
     """
     message = TextSendMessage(text=event.message.text)
     replay_message(event,message)
-    # if "name" in event.message.text:
-    #     line_bot_api.reply_message(event.reply_token,TextMessage("Casper"))
+    if "name" in event.message.text:
+        line_bot_api.reply_message(event.reply_token,TextMessage("Casper"))
  
 def replay_message(event,text):
     line_bot_api.reply_message(
