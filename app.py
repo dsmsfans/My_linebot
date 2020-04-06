@@ -76,7 +76,7 @@ def handle_sticker_message(event):
         line_bot_api.push_message(
             event.source.user_id, TextSendMessage(text='我沒有這個貼圖QQ'))
         line_bot_api.push_message(
-            event.source.user_id, StickerSendMessage(package_id=2, sticker_id=154))
+            event.source.user_id, StickerSendMessage(package_id=2, sticker_id=173))
 
 @app.route('/')
 def index():
