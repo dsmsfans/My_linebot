@@ -46,7 +46,7 @@ def handle_message(event):
     input_text = event.message.text.encode('utf-8')
     # message = TextSendMessage(text=event.message.text)
     # replay_message(event,message)
-    if "name" in input_text:
+    if "name" == input_text:
         line_bot_api.reply_message(event.reply_token,TextMessage(text="My name is Casper"))
  
 
