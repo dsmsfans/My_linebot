@@ -47,7 +47,7 @@ def handle_message(event):
     # message = TextSendMessage(text=event.message.text)
     # replay_message(event,message)
     if input_text == "name":
-        line_bot_api.reply_message(event.reply_token,TextMessage(text="My name is Casper"))
+        line_bot_api.reply_message(event.reply_token,TextMessage("My name is Casper"))
  
 
 
