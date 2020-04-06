@@ -52,9 +52,9 @@ def handle_message(event):
     * 建議讀者可以自行更改(text=event.message.text) 例如改成 (text="Hello World")
     """
     message = TextSendMessage(text=event.message.text)
-    if "name" in message:
-        replay_message(event,"Casper")
     replay_message(event,message)
+    if "name" in message:
+        line_bot_api.reply_message(event.reply_token,TextMessage("Casper"))
  
 def replay_message(event,text):
     line_bot_api.reply_message(
