@@ -48,6 +48,10 @@ def handle_message(event):
     if "name" in event.message.text:
         line_bot_api.reply_message(event.reply_token,TextMessage("Casper"))
  
+@app.route('/')
+def index():
+    return 'Hello World'
+
 def replay_message(event,text):
     line_bot_api.reply_message(
         event.reply_token,
