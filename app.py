@@ -53,8 +53,8 @@ def handle_message(event):
     """
     message = TextSendMessage(text=event.message.text)
     replay_message(event,message)
-    if "name" in event.message.text:
-        line_bot_api.reply_message(event.reply_token,TextMessage("Casper"))
+    # if "name" in event.message.text:
+    #     line_bot_api.reply_message(event.reply_token,TextMessage("Casper"))
  
 def replay_message(event,text):
     line_bot_api.reply_message(
