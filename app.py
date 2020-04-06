@@ -60,9 +60,9 @@ def push_message(event,text):
         event.source.user_id,
         text)        
 
-@app.route('/')
-def index():
-    return 'Hello World'
+# @app.route('/')
+# def index():
+#     return 'Hello World'
 
     
 if __name__ == "__main__":
