@@ -46,6 +46,9 @@ def handle_message(event):
     if "name" in event.message.text:
         message = TextSendMessage(text="My name is Casper")
         replay_message(event,message)
+    if "sex" in event.message.text:
+        message = TextSendMessage(text="I'm a boy!")
+        replay_message(event,message)
     else:
         message = TextSendMessage(text=event.message.text)
         replay_message(event,message)
