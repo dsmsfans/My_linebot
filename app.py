@@ -48,11 +48,12 @@ def handle_message(event):
         message = TextSendMessage(text="安安你好！\n我是Casper chat bot \n你想知道關於我什麼呢？")
         replay_message(event,message)
     if ("介紹" in msg) or ("關於我" in msg):
-        message = TextSendMessage(text="我叫做范植承\n生日是84/03/18(雙魚座)\n英文名字是Casper\n個性比較悶騷 喜歡嘗試新東西\n \
-            好奇心強 熟了話就比較多")
+        message = TextSendMessage(text="我叫做范植承\n生日是84/03/18(雙魚座)\n英文名字是Casper\n個性比較悶騷 喜歡嘗試新東西\n好奇心強 熟了話就比較多")
         replay_message(event,message)
-    if "sex" in msg:
-        message = TextSendMessage(text="I'm a boy!")
+    if （"學歷" in msg）or ("學校" in msg) or ("大學" in msg) or ("研究所" in msg) or ("科系" in msg):
+        message = TextSendMessage(text="我大學畢業於雲林科技大學 資訊工程系\n\
+                                        研究所畢業於臺北科技大學 資訊工程所\n\
+                                        我的論文是：Probabilistic Top-k Dominating Query Processing on Multiple Uncertain Data Streams in Edge Computing Environments")
         replay_message(event,message)
     else:
         message = TextSendMessage(text=msg)
