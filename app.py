@@ -44,8 +44,8 @@ def handle_message(event):
     # profile = line_bot_api.get_profile(event.source.user_id)
     # input_text = event.message.text.encode('utf-8')
     msg = event.message.text
-    if "name" in msg:
-        message = TextSendMessage(text="My name is Casper")
+    if ("name" in msg) or ("Hi" in msg) or ("Hello" in msg) or ("你好" in msg) or ("Yo" in msg):
+        message = TextSendMessage(text="你好！ 我的名字是范植承\n英文名字是 Casper \n 你想知道關於我什麼呢？")
         replay_message(event,message)
     if "sex" in msg:
         message = TextSendMessage(text="I'm a boy!")
