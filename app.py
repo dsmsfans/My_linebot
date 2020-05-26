@@ -33,6 +33,23 @@ def callback():
 
     return 'OK'
 
+url_carousel = reply_msg = os.environ.get('CAROUSEL')
+button_info = TemplateSendMessage(
+	alt_text="使用說明",
+	template=ButtonsTemplate(
+		title="使用說明",
+		text="請參考以下說明：",
+		thumbnail_image_url=url_carousel,
+		actions=[
+			URITemplateAction(
+				label='github',
+				uri='https://github.com/dsmsfans'),
+			MessageTemplateAction(
+				label="使用範例",
+				text="使用範例")])
+)
+
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     # print(event)
