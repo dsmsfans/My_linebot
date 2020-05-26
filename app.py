@@ -169,6 +169,8 @@ def handle_message(event):
     if ("程式" in msg) or ("語言" in msg) or ("證照" in msg):
         message = TextSendMessage(text="最擅長的程式語言是python\n其他的語言有C/C++\n大學學過一些Java HTML\n多益成績是850")
         replay_message(event,message)
+    if ("範例" in msg):
+        carousel_example
     else:
         message = TextSendMessage(text=msg)
         replay_message(event,message)
