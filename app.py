@@ -45,6 +45,7 @@ def handle_message(event):
     # input_text = event.message.text.encode('utf-8')
     msg = event.message.text
     if ("name" in msg) or ("Hi" in msg) or ("Hello" in msg) or ("你好" in msg) or ("Yo" in msg):
+        line_bot_api.push_message(event.source.user_id, StickerSendMessage(package_id=11538, sticker_id=51626494))
         message = TextSendMessage(text="安安你好！\n我是Casper chat bot \n你想知道關於我什麼呢？")
         replay_message(event,message)
     if ("介紹" in msg) or ("關於我" in msg):
