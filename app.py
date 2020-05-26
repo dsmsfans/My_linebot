@@ -43,14 +43,15 @@ def handle_message(event):
     """
     # profile = line_bot_api.get_profile(event.source.user_id)
     # input_text = event.message.text.encode('utf-8')
-    if "name" in event.message.text:
+    msg = event.message.text
+    if "name" in msg:
         message = TextSendMessage(text="My name is Casper")
         replay_message(event,message)
-    if "sex" in event.message.text:
+    if "sex" in msg:
         message = TextSendMessage(text="I'm a boy!")
         replay_message(event,message)
     else:
-        message = TextSendMessage(text=event.message.text)
+        message = TextSendMessage(text=msg)
         replay_message(event,message)
     # if input_text == "name":
     #     message = TextSendMessage(text="My name is Casper")
