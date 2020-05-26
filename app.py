@@ -51,9 +51,10 @@ def handle_message(event):
         message = TextSendMessage(text="我叫做范植承\n生日是84/03/18(雙魚座)\n英文名字是Casper\n個性比較悶騷 喜歡嘗試新東西\n好奇心強 熟了話就比較多")
         replay_message(event,message)
     if ("學歷" in msg)or ("學校" in msg) or ("大學" in msg) or ("研究所" in msg) or ("科系" in msg):
-        message = TextSendMessage(text="我大學畢業於雲林科技大學 資訊工程系\n\
-                                        研究所畢業於臺北科技大學 資訊工程所\n\
-                                        我的論文是：Probabilistic Top-k Dominating Query Processing on Multiple Uncertain Data Streams in Edge Computing Environments")
+        message = TextSendMessage(text="我大學畢業於雲林科技大學 資訊工程系\n\研究所畢業於臺北科技大學 資訊工程所\n研究方向是資料處理以及演算法")
+        replay_message(event,message)
+    if ("經歷" in msg)or ("工作" in msg) or ("實習" in msg) or ("打工" in msg) or ("公司" in msg):
+        message = TextSendMessage(text="2014/07~2014/08\n於葛氏兄弟企業有限公司擔任電腦組裝員\n2018/07~2019/10\n於趨勢科擔任Intern")
         replay_message(event,message)
     else:
         message = TextSendMessage(text=msg)
