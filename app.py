@@ -61,6 +61,7 @@ def handle_message(event):
         message = TextSendMessage(text="最擅長的程式語言是python\n其他的語言有C/C++\n大學學過一些Java HTML\n多益成績是850")
         replay_message(event,message)
     elif ("範例" in msg):
+        print("Confirm template")       
         Confirm_template = TemplateSendMessage(
         alt_text='目錄 template',
         template=ConfirmTemplate(
@@ -79,7 +80,8 @@ def handle_message(event):
             ]
         )
     )
-    line_bot_api.reply_message(event.reply_token,Confirm_template)
+        line_bot_api.reply_message(event.reply_token,Confirm_template)
+
     else:
         message = TextSendMessage(text=msg)
         replay_message(event,message)
