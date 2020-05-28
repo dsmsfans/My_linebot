@@ -34,7 +34,12 @@ def callback():
     return 'OK'
 
 
-carousel_example = TemplateSendMessage(
+
+
+
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+    carousel_example = TemplateSendMessage(
 	alt_text="範例問題",
 	template=CarouselTemplate(
 		columns=[
@@ -109,10 +114,6 @@ carousel_example = TemplateSendMessage(
 						label="有沒有提供簡歷呢？",
 						text="有沒有提供簡歷呢？"),])])
 )
-
-
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
     # print(event)
     """
     * event.message.text 是 使用者傳回來的對話
