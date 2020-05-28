@@ -60,7 +60,7 @@ def handle_message(event):
     elif ("程式" in msg) or ("語言" in msg) or ("證照" in msg):
         message = TextSendMessage(text="最擅長的程式語言是python\n其他的語言有C/C++\n大學學過一些Java HTML\n多益成績是850")
         replay_message(event,message)
-    elif event.message.text == "123":
+    elif ("測試" in msg):
         Carousel_template = TemplateSendMessage(
         alt_text='Carousel template',
         template=CarouselTemplate(
@@ -108,7 +108,7 @@ def handle_message(event):
         ]
     )
     )
-        line_bot_api.reply_message(event.reply_token,Carousel_template)
+    line_bot_api.reply_message(event.reply_token,Carousel_template)
     elif ("範例" in msg):
         print("Confirm template")       
         Confirm_template = TemplateSendMessage(
