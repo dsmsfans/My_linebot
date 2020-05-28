@@ -64,7 +64,7 @@ def handle_message(event):
         Carousel_template = TemplateSendMessage(
         alt_text='Carousel template',
         template=CarouselTemplate(
-        columns=[
+            columns=[
             CarouselColumn(
                 thumbnail_image_url='顯示在開頭的大圖片網址',
                 title='this is menu1',
@@ -105,10 +105,10 @@ def handle_message(event):
                     )
                 ]
             )
-        ]
+            ]
+        )
     )
-    )
-    line_bot_api.reply_message(event.reply_token,Carousel_template)
+        line_bot_api.reply_message(event.reply_token,Carousel_template)
     elif ("範例" in msg):
         print("Confirm template")       
         Confirm_template = TemplateSendMessage(
