@@ -34,12 +34,7 @@ def callback():
     return 'OK'
 
 
-
-
-
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    carousel_example = TemplateSendMessage(
+carousel_example = TemplateSendMessage(
 	alt_text="範例問題",
 	template=CarouselTemplate(
 		columns=[
@@ -114,6 +109,10 @@ def handle_message(event):
 						label="有沒有提供簡歷呢？",
 						text="有沒有提供簡歷呢？"),])])
 )
+
+
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
     # print(event)
     """
     * event.message.text 是 使用者傳回來的對話
@@ -127,20 +126,46 @@ def handle_message(event):
         line_bot_api.push_message(event.source.user_id, StickerSendMessage(package_id=11538, sticker_id=51626494))
         message = TextSendMessage(text="安安你好！\n我是Casper chat bot \n你想知道關於我什麼呢？")
         replay_message(event,message)
-    if ("介紹" in msg) or ("關於我" in msg):
+    elif ("介紹" in msg) or ("關於我" in msg):
         message = TextSendMessage(text="我叫做范植承\n生日是84/03/18(雙魚座)\n英文名字是Casper\n個性比較悶騷 喜歡嘗試新東西\n好奇心強 熟了話就比較多")
         replay_message(event,message)
-    if ("學歷" in msg) or ("學校" in msg) or ("大學" in msg) or ("研究所" in msg) or ("科系" in msg) or ("學習" in msg):
+    elif ("學歷" in msg) or ("學校" in msg) or ("大學" in msg) or ("研究所" in msg) or ("科系" in msg) or ("學習" in msg):
         message = TextSendMessage(text="我大學畢業於雲林科技大學 資訊工程系\n研究所畢業於臺北科技大學 資訊工程所\n研究方向是資料處理以及演算法")
         replay_message(event,message)
-    if ("經歷" in msg) or ("工作" in msg) or ("實習" in msg) or ("打工" in msg) or ("公司" in msg):
+    elif ("經歷" in msg) or ("工作" in msg) or ("實習" in msg) or ("打工" in msg) or ("公司" in msg):
         message = TextSendMessage(text="我的工作經歷\n2014/07~2014/08\n於葛氏兄弟企業有限公司擔任電腦組裝員\n2018/07~2019/10\n於趨勢科擔任Intern")
         replay_message(event,message)
-    if ("程式" in msg) or ("語言" in msg) or ("證照" in msg):
+    elif ("程式" in msg) or ("語言" in msg) or ("證照" in msg):
         message = TextSendMessage(text="最擅長的程式語言是python\n其他的語言有C/C++\n大學學過一些Java HTML\n多益成績是850")
         replay_message(event,message)
-    if ("範例" in msg):
-        carousel_example
+    elif ("範例" in msg):
+        Carousel_template = TemplateSendMessage(
+            alt_text='範例問題',
+            template=CarouselTemplate(
+                columns = [
+                    CarouselColumn(
+                        thumbnail_image_url='顯示在開頭的大圖片網址',
+                        title='this is menu1',
+                        text='description1',
+                        actions=[
+                            PostbackTemplateAction(
+                                label='postback1',
+                                text='postback text1',
+                                data='action=buy&itemid=1'
+                            ),
+                            MessageTemplateAction(
+                                label='message1',
+                                text='message text1'
+                            ),
+                            URITemplateAction(
+                                label='uri1',
+                                uri='http://example.com/1'
+                            )
+                        ]
+                    )
+                ]
+            )
+        )
     else:
         message = TextSendMessage(text=msg)
         replay_message(event,message)
