@@ -139,33 +139,25 @@ def handle_message(event):
         message = TextSendMessage(text="最擅長的程式語言是python\n其他的語言有C/C++\n大學學過一些Java HTML\n多益成績是850")
         replay_message(event,message)
     elif ("範例" in msg):
-        Carousel_template = TemplateSendMessage(
-            alt_text='範例問題',
-            template=CarouselTemplate(
-                columns = [
-                    CarouselColumn(
-                        thumbnail_image_url='顯示在開頭的大圖片網址',
-                        title='this is menu1',
-                        text='description1',
-                        actions=[
-                            PostbackTemplateAction(
-                                label='postback1',
-                                text='postback text1',
-                                data='action=buy&itemid=1'
-                            ),
-                            MessageTemplateAction(
-                                label='message1',
-                                text='message text1'
-                            ),
-                            URITemplateAction(
-                                label='uri1',
-                                uri='http://example.com/1'
-                            )
-                        ]
-                    )
-                ]
-            )
+        Confirm_template = TemplateSendMessage(
+        alt_text='目錄 template',
+        template=ConfirmTemplate(
+            title='這是ConfirmTemplate',
+            text='這就是ConfirmTemplate,用於兩種按鈕選擇',
+            actions=[                              
+                PostbackTemplateAction(
+                    label='Y',
+                    text='Y',
+                    data='action=buy&itemid=1'
+                ),
+                MessageTemplateAction(
+                    label='N',
+                    text='N'
+                )
+            ]
         )
+    )
+        line_bot_api.reply_message(event.reply_token,Confirm_template)
     else:
         message = TextSendMessage(text=msg)
         replay_message(event,message)
