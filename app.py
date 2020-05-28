@@ -60,50 +60,50 @@ def handle_message(event):
     elif ("程式" in msg) or ("語言" in msg) or ("證照" in msg):
         message = TextSendMessage(text="最擅長的程式語言是python\n其他的語言有C/C++\n大學學過一些Java HTML\n多益成績是850")
         replay_message(event,message)
-    elif ("測試" in msg):
-        buttons_template = TemplateSendMessage(
-            alt_text='Buttons Template',
-            template=ButtonsTemplate(
-                title='這是ButtonsTemplate',
-                text='ButtonsTemplate可以傳送text,uri',
-                thumbnail_image_url='顯示在開頭的大圖片網址',
-                actions=[
-                    MessageTemplateAction(
-                        label='ButtonsTemplate',
-                        text='ButtonsTemplate'
-                    ),
-                    URITemplateAction(
-                        label='VIDEO1',
-                        uri='影片網址'
-                    ),
-                    PostbackTemplateAction(
-                        label='postback',
-                        text='postback text',
-                        data='postback1'
-                    )
-                ]
-            )
-        )
-        line_bot_api.reply_message(event.reply_token, buttons_template)
-    # elif ("範例" in msg):     
-    #     Confirm_template = TemplateSendMessage(
-    #         alt_text='目錄 template',
-    #         template=ConfirmTemplate(
-    #             title='這是ConfirmTemplate',
-    #             text='這就是ConfirmTemplate,用於兩種按鈕選擇',
-    #             actions=[                              
-    #                 PostbackTemplateAction(
-    #                     label='Y',
-    #                     text='Y',
-    #                     data='action=buy&itemid=1'
-    #                 ),
+    # elif ("測試" in msg):
+    #     buttons_template = TemplateSendMessage(
+    #         alt_text='Buttons Template',
+    #         template=ButtonsTemplate(
+    #             title='這是ButtonsTemplate',
+    #             text='ButtonsTemplate可以傳送text,uri',
+    #             thumbnail_image_url='顯示在開頭的大圖片網址',
+    #             actions=[
     #                 MessageTemplateAction(
-    #                     label='N',
-    #                     text='N'
+    #                     label='ButtonsTemplate',
+    #                     text='ButtonsTemplate'
+    #                 ),
+    #                 URITemplateAction(
+    #                     label='VIDEO1',
+    #                     uri='影片網址'
+    #                 ),
+    #                 PostbackTemplateAction(
+    #                     label='postback',
+    #                     text='postback text',
+    #                     data='postback1'
     #                 )
     #             ]
     #         )
-    #     )line_bot_api.reply_message(event.reply_token,Confirm_template)
+    #     )
+    #     line_bot_api.reply_message(event.reply_token, buttons_template)
+    elif ("範例" in msg):     
+        Confirm_template = TemplateSendMessage(
+            alt_text='目錄 template',
+            template=ConfirmTemplate(
+                title='這是ConfirmTemplate',
+                text='這就是ConfirmTemplate,用於兩種按鈕選擇',
+                actions=[                              
+                    PostbackTemplateAction(
+                        label='Y',
+                        text='Y',
+                        data='action=buy&itemid=1'
+                    ),
+                    MessageTemplateAction(
+                        label='N',
+                        text='N'
+                    )
+                ]
+            )
+        )line_bot_api.reply_message(event.reply_token,Confirm_template)
 
     else:
         message = TextSendMessage(text=msg)
