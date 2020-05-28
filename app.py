@@ -34,7 +34,83 @@ def callback():
     return 'OK'
 
 
-    
+carousel_example = TemplateSendMessage(
+	alt_text="範例問題",
+	template=CarouselTemplate(
+		columns=[
+			CarouselColumn(
+				thumbnail_image_url=url_carousel,
+				title="功能介紹 - 實習相關問題",
+				text="你可以試著問我這樣的問題",
+				actions=[
+					MessageTemplateAction(
+						label="你有實習的經驗嗎？",
+						text="你有實習的經驗嗎？"),
+					MessageTemplateAction(
+						label="說說你的實習經驗吧",
+						text="說說你的實習經驗吧"),
+					MessageTemplateAction(
+						label="你有相關的工作經驗嗎？",
+						text="你有相關的工作經驗嗎？"),]),
+			CarouselColumn(
+				thumbnail_image_url=url_carousel,
+				title="功能介紹 - 學歷相關問題",
+				text="你可以試著問我這樣的問題",
+				actions=[
+					MessageTemplateAction(
+						label="你目前就讀那間學校呢？",
+						text="你目前就讀那間學校呢？"),
+					MessageTemplateAction(
+						label="說說你的學歷吧",
+						text="說說你的學歷吧"),
+					MessageTemplateAction(
+						label="你畢業於哪一所學校呢？",
+						text="你畢業於哪一所學校呢？"),]),
+			CarouselColumn(
+				thumbnail_image_url=url_carousel,
+				title="功能介紹 - 程式語言相關問題",
+				text="你可以試著問我這樣的問題",
+				actions=[
+					MessageTemplateAction(
+						label="你會使用哪些程式語言呢？",
+						text="你會使用哪些程式語言呢？"),
+					MessageTemplateAction(
+						label="說說你會用的語言吧",
+						text="說說你會用的語言吧"),
+					MessageTemplateAction(
+						label="你都用什麼語言寫程式？",
+						text="你都用什麼語言寫程式？"),]),
+			CarouselColumn(
+				thumbnail_image_url=url_carousel,
+				title="功能介紹 - 興趣相關問題",
+				text="你可以試著問我這樣的問題",
+				actions=[
+					MessageTemplateAction(
+						label="你的興趣是什麼呢？",
+						text="你的興趣是什麼呢？"),
+					MessageTemplateAction(
+						label="說說你的興趣吧",
+						text="說說你的興趣吧"),
+					MessageTemplateAction(
+						label="你有什麼興趣嗎？",
+						text="你有什麼興趣嗎？"),]),
+			CarouselColumn(
+				thumbnail_image_url=url_carousel,
+				title="功能介紹 - 履歷相關問題",
+				text="你可以試著問我這樣的問題",
+				actions=[
+					MessageTemplateAction(
+						label="可以看看你的履歷嗎？",
+						text="可以看看你的履歷嗎？"),
+					MessageTemplateAction(
+						label="可以提供自傳相關資料嗎？",
+						text="可以提供自傳相關資料嗎？"),
+					MessageTemplateAction(
+						label="有沒有提供簡歷呢？",
+						text="有沒有提供簡歷呢？"),])])
+)
+
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     # print(event)
@@ -62,6 +138,8 @@ def handle_message(event):
     if ("程式" in msg) or ("語言" in msg) or ("證照" in msg):
         message = TextSendMessage(text="最擅長的程式語言是python\n其他的語言有C/C++\n大學學過一些Java HTML\n多益成績是850")
         replay_message(event,message)
+    if ("範例" in msg):
+        carousel_example
     else:
         message = TextSendMessage(text=msg)
         replay_message(event,message)
