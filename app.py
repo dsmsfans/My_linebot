@@ -89,17 +89,17 @@ def handle_message(event):
         Confirm_template = TemplateSendMessage(
             alt_text='目錄 template',
             template=ConfirmTemplate(
-                title='這是ConfirmTemplate',
-                text='這就是ConfirmTemplate,用於兩種按鈕選擇',
+                title='ConfirmTemplate',
+                text='了解我的學經歷',
                 actions=[                              
                     PostbackTemplateAction(
-                        label='Y',
-                        text='Y',
+                        label='學歷',
+                        text='學歷',
                         data='action=buy&itemid=1'
                     ),
                     MessageTemplateAction(
-                        label='N',
-                        text='N'
+                        label='經歷',
+                        text='經歷'
                     )
                 ]
             )
