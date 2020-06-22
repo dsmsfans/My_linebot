@@ -97,21 +97,21 @@ def handle_message(event):
     elif ("範例" in msg):
         Confirm_template = TemplateSendMessage(
             {
-                "type": "template",
-                "altText": "this is a confirm template",
-                "template": {
-                    "type": "confirm",
-                    "text": "Are you sure?",
-                    "actions": [
+                type: "template",
+                altText: "this is a confirm template",
+                template: {
+                    type: "confirm",
+                    text: "Are you sure?",
+                    actions: [
                         {
-                            "type": "message",
-                            "label": "Yes",
-                            "text": "yes"
+                            type: "message",
+                            label: "Yes",
+                            text: "yes"
                         },
                         {
-                            "type": "message",
-                            "label": "No",
-                            "text": "no"
+                            type: "message",
+                            label: "No",
+                            text: "no"
                         }
                     ]
                 }
