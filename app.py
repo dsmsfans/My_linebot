@@ -109,6 +109,10 @@ def handle_message(event):
                         label='經歷',
                         text='經歷'
                     )
+                    MessageTemplateAction(
+                        label='介紹',
+                        text='介紹'
+                    )
                 ]
             )
         )
