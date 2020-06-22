@@ -94,10 +94,10 @@ def handle_message(event):
                         thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg',
                         title="我的Facebook",
                         actions=[
-                            URITemplateAction(
-                                label="Facebook",
-                                uri='https://www.facebook.com/profile.php?id=100001440018890'
-                            ),
+                            # URITemplateAction(
+                            #     label="Facebook",
+                            #     uri='https://www.facebook.com/profile.php?id=100001440018890'
+                            # ),
                             MessageTemplateAction(label='介紹', text='介紹')
                         ]
                     )
