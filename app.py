@@ -101,10 +101,9 @@ def handle_message(event):
                 title='ConfirmTemplate',
                 text='了解我的學經歷',
                 actions=[
-                    PostbackTemplateAction(
+                    MessageTemplateAction(
                         label='學歷',
                         text='學歷',
-                        data='action=buy&itemid=1'
                     ),
                     MessageTemplateAction(
                         label='經歷',
