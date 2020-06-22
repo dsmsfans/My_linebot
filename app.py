@@ -51,23 +51,23 @@ def handle_message(event):
         line_bot_api.push_message(event.source.user_id, StickerSendMessage(
             package_id=11538, sticker_id=51626494))
         message = TextSendMessage(
-            text="安安你好！\n我是Casper chat bot \n你想知道關於我什麼呢？")
+            text="安安你好！\n\n我是Casper chat bot \n\n你想知道關於我什麼呢？")
         replay_message(event, message)
     elif ("介紹" in msg) or ("關於我" in msg):
         message = TextSendMessage(
-            text="我叫做范植承\n生日是84/03/18(雙魚座)\n英文名字是Casper\n個性比較悶騷 喜歡嘗試新東西\n好奇心強 熟了話就比較多\興趣是打排球🏐跟健身🏋🏻")
+            text="我叫做范植承\n\n生日是84/03/18(雙魚座)\n\n英文名字是Casper\n\n個性比較悶騷 喜歡嘗試新東西\n\n好奇心強 熟了話就比較多\興趣是打排球🏐跟健身🏋🏻")
         replay_message(event, message)
     elif ("學歷" in msg) or ("學校" in msg) or ("大學" in msg) or ("研究所" in msg) or ("科系" in msg) or ("學習" in msg):
         message = TextSendMessage(
-            text="大學:\n畢業於雲林科技大學\n資訊工程系\n研究所:\n畢業於臺北科技大學\n資訊工程所\n研究方向及論文:\n資料處理以及演算法")
+            text="大學:\n\n畢業於雲林科技大學\n\n資訊工程系\n\n研究所:\n\n畢業於臺北科技大學\n\n資訊工程所\n\n研究方向及論文:\n\n資料處理以及演算法")
         replay_message(event, message)
     elif ("經歷" in msg) or ("工作" in msg) or ("實習" in msg) or ("打工" in msg) or ("公司" in msg):
         message = TextSendMessage(
-            text="我的工作經歷💼\nfrom 2014/07 to 2014/08\n於葛氏兄弟企業有限公司\n擔任電腦組裝員🔧\nfrom 2018/07 to 2019/10\n於趨勢科擔任Intern")
+            text="我的工作經歷💼\n\nfrom 2014/07 to 2014/08\n\n於葛氏兄弟企業有限公司\n\n擔任電腦組裝員🔧\n\nfrom 2018/07 to 2019/10\n\n於趨勢科擔任Intern")
         replay_message(event, message)
     elif ("程式" in msg) or ("語言" in msg) or ("證照" in msg):
         message = TextSendMessage(
-            text="最擅長的程式語言是python\n其他的語言有C/C++\n大學學過一些Java HTML\n多益成績是850")
+            text="最擅長的程式語言是python\n\n其他的語言有C/C++\n\n大學學過一些Java HTML\n\n多益成績是850")
         replay_message(event, message)
     elif ("範例" in msg):
         buttons_template = TemplateSendMessage(
@@ -77,18 +77,9 @@ def handle_message(event):
                 text='選擇下列按鈕可以認識我',
                 thumbnail_image_url='https://stickershop.line-scdn.net/stickershop/v1/sticker/2462/android/sticker.png',
                 actions=[
-                    MessageTemplateAction(
-                        label='學歷',
-                        text='學歷',
-                    ),
-                    MessageTemplateAction(
-                        label='經歷',
-                        text='經歷'
-                    ),
-                    MessageTemplateAction(
-                        label='介紹',
-                        text='介紹'
-                    )
+                    MessageTemplateAction(label='學歷', text='學歷',),
+                    MessageTemplateAction(label='經歷', text='經歷'),
+                    MessageTemplateAction(label='介紹', text='介紹')
                 ]
             )
         )
