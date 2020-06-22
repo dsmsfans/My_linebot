@@ -55,7 +55,7 @@ def handle_message(event):
         replay_message(event, message)
     elif ("介紹" in msg) or ("關於我" in msg):
         message = TextSendMessage(
-            text="我叫做范植承\n\n生日是84/03/18(雙魚座)\n\n英文名字是Casper\n\n個性比較悶騷 喜歡嘗試新東西\n\n好奇心強 熟了話就比較多\興趣是打排球🏐跟健身🏋🏻")
+            text="我叫做范植承\n\n生日是84/03/18(雙魚座)\n\n英文名字是Casper\n\n個性比較悶騷 喜歡嘗試新東西\n\n好奇心強 熟了話就比較多\n\n興趣是打排球🏐跟健身🏋🏻")
         replay_message(event, message)
     elif ("學歷" in msg) or ("學校" in msg) or ("大學" in msg) or ("研究所" in msg) or ("科系" in msg) or ("學習" in msg):
         message = TextSendMessage(
@@ -75,7 +75,7 @@ def handle_message(event):
             template=ButtonsTemplate(
                 title='這是範例問題',
                 text='選擇下列按鈕可以認識我',
-                thumbnail_image_url='https://stickershop.line-scdn.net/stickershop/v1/sticker/2462/android/sticker.png',
+                thumbnail_image_url='https://vignette.wikia.nocookie.net/spongebobsquarepants/images/7/7f/Patrick_Star-1-.svg/revision/latest/top-crop/width/360/height/450?cb=20140617123710&path-prefix=zh',
                 actions=[
                     MessageTemplateAction(label='學歷', text='學歷',),
                     MessageTemplateAction(label='經歷', text='經歷'),
