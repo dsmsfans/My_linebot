@@ -85,6 +85,46 @@ def handle_message(event):
         )
         line_bot_api.reply_message(event.reply_token, buttons_template)
 
+    elif ("測試" in msg):
+        carousel_template = TemplateSendMessage(
+            alt_text='Carousel Template',
+            template=CarouselTemplate(
+                columns=[
+                    CarouselColumn(
+                        thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg',
+                        title="我的Facebook"
+                        actions=[
+                            URITemplateAction(
+                                label="Facebook"
+                                uri='https://www.facebook.com/profile.php?id=100001440018890'
+                            )
+                        ]
+                    )
+                    CarouselColumn(
+                        thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/5/58/Instagram-Icon.png',
+                        title="我的Instagram"
+                        actions=[
+                            URITemplateAction(
+                                label="Instagram"
+                                uri='https://www.instagram.com/casper_0318/'
+                            )
+                        ]
+                    )
+                    CarouselColumn(
+                        thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg',
+                        title="我的Github"
+                        actions=[
+                            URITemplateAction(
+                                label="Github"
+                                uri='https://github.com/dsmsfans'
+                            )
+                        ]
+                    )
+                ]
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, buttons_template)
+    
     else:
         message = TextSendMessage(text=msg)
         replay_message(event, message)
