@@ -69,13 +69,13 @@ def handle_message(event):
         message = TextSendMessage(
             text="最擅長的程式語言是python\n其他的語言有C/C++\n大學學過一些Java HTML\n多益成績是850")
         replay_message(event, message)
-    elif ("測試" in msg):
+    elif ("範例" in msg):
         buttons_template = TemplateSendMessage(
             alt_text='Buttons Template',
             template=ButtonsTemplate(
-                title='這是ButtonsTemplate',
-                text='ButtonsTemplate可以傳送text,uri',
-                thumbnail_image_url='https://p2.bahamut.com.tw/HOME/creationCover/56/0004385956_B.PNG',
+                title='這是範例問題',
+                text='選擇下列按鈕可以認識我',
+                thumbnail_image_url='https://stickershop.line-scdn.net/stickershop/v1/sticker/2462/android/sticker.png',
                 actions=[
                     MessageTemplateAction(
                         label='學歷',
@@ -93,25 +93,6 @@ def handle_message(event):
             )
         )
         line_bot_api.reply_message(event.reply_token, buttons_template)
-    elif ("範例" in msg):
-        Confirm_template = TemplateSendMessage(
-            alt_text='目錄 template',
-            template=ConfirmTemplate(
-                title='ConfirmTemplate',
-                text='了解我的學經歷',
-                actions=[
-                    MessageTemplateAction(
-                        label='學歷',
-                        text='學歷',
-                    ),
-                    MessageTemplateAction(
-                        label='經歷',
-                        text='經歷'
-                    )
-                ]
-            )
-        )
-        line_bot_api.reply_message(event.reply_token, Confirm_template)
 
     else:
         message = TextSendMessage(text=msg)
