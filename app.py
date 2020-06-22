@@ -96,22 +96,26 @@ def handle_message(event):
     #     line_bot_api.reply_message(event.reply_token, buttons_template)
     elif ("範例" in msg):
         Confirm_template = TemplateSendMessage(
-            alt_text='目錄 template',
-            template=ConfirmTemplate(
-                title='ConfirmTemplate',
-                text='了解我的學經歷',
-                actions=[
-                    PostbackTemplateAction(
-                        label='學歷',
-                        text='學歷',
-                        data='action=buy&itemid=1'
-                    ),
-                    MessageTemplateAction(
-                        label='經歷',
-                        text='經歷'
-                    )
-                ]
-            )
+            {
+                "type": "template",
+                "altText": "this is a confirm template",
+                "template": {
+                    "type": "confirm",
+                    "text": "Are you sure?",
+                    "actions": [
+                        {
+                            "type": "message",
+                            "label": "Yes",
+                            "text": "yes"
+                        },
+                        {
+                            "type": "message",
+                            "label": "No",
+                            "text": "no"
+                        }
+                    ]
+                }
+            }
         )
         line_bot_api.reply_message(event.reply_token, Confirm_template)
 
