@@ -83,7 +83,7 @@ def handle_message(event):
                 ]
             )
         )
-        line_bot_api.reply_message(event.reply_token, buttons_template)
+        reply_message(event, buttons_template)
 
     elif ("測試" in msg):
         carousel_template = TemplateSendMessage(
@@ -91,7 +91,7 @@ def handle_message(event):
             template=CarouselTemplate(
                 columns=[
                     CarouselColumn(
-                        # thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg',
+                        thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg',
                         title='我的Facebook',
                         actions=[
                             URITemplateAction(
@@ -99,31 +99,31 @@ def handle_message(event):
                                 uri='https://www.facebook.com/profile.php?id=100001440018890'
                             )
                         ]
+                    ),
+                    CarouselColumn(
+                        thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/5/58/Instagram-Icon.png',
+                        title="我的Instagram",
+                        actions=[
+                            URITemplateAction(
+                                label="Instagram",
+                                uri='https://www.instagram.com/casper_0318/'
+                            )
+                        ]
+                    ),
+                    CarouselColumn(
+                        thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg',
+                        title="我的Github",
+                        actions=[
+                            URITemplateAction(
+                                label="Github",
+                                uri='https://github.com/dsmsfans'
+                            )
+                        ]
                     )
-                    # CarouselColumn(
-                    #     thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/5/58/Instagram-Icon.png',
-                    #     title="我的Instagram",
-                    #     actions=[
-                    #         URITemplateAction(
-                    #             label="Instagram",
-                    #             uri='https://www.instagram.com/casper_0318/'
-                    #         )
-                    #     ]
-                    # ),
-                    # CarouselColumn(
-                    #     thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg',
-                    #     title="我的Github",
-                    #     actions=[
-                    #         URITemplateAction(
-                    #             label="Github",
-                    #             uri='https://github.com/dsmsfans'
-                    #         )
-                    #     ]
-                    # )
                 ]
             )
         )
-        line_bot_api.reply_message(event.reply_token, carousel_template)
+        reply_message(event, carousel_template)
     
     else:
         message = TextSendMessage(text=msg)
