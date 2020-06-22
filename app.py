@@ -95,27 +95,27 @@ def handle_message(event):
                         title="我的Facebook",
                         actions=[
                             URITemplateAction(
-                                label="Facebook"
+                                label="Facebook",
                                 uri='https://www.facebook.com/profile.php?id=100001440018890'
                             )
                         ]
                     )
                     CarouselColumn(
                         thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/5/58/Instagram-Icon.png',
-                        title="我的Instagram"
+                        title="我的Instagram",
                         actions=[
                             URITemplateAction(
-                                label="Instagram"
+                                label="Instagram",
                                 uri='https://www.instagram.com/casper_0318/'
                             )
                         ]
                     )
                     CarouselColumn(
                         thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg',
-                        title="我的Github"
+                        title="我的Github",
                         actions=[
                             URITemplateAction(
-                                label="Github"
+                                label="Github",
                                 uri='https://github.com/dsmsfans'
                             )
                         ]
