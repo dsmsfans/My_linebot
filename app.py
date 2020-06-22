@@ -99,7 +99,7 @@ def handle_message(event):
                                 uri='https://www.facebook.com/profile.php?id=100001440018890'
                             )
                         ]
-                    )
+                    ),
                     CarouselColumn(
                         thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/5/58/Instagram-Icon.png',
                         title="我的Instagram",
@@ -109,7 +109,7 @@ def handle_message(event):
                                 uri='https://www.instagram.com/casper_0318/'
                             )
                         ]
-                    )
+                    ),
                     CarouselColumn(
                         thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg',
                         title="我的Github",
