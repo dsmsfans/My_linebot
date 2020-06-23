@@ -49,7 +49,7 @@ def handle_message(event):
     """
     # profile = line_bot_api.get_profile(event.source.user_id)
     # input_text = event.message.text.encode('utf-8')
-    msg = event.message.text
+    msg = event.message.text.lower()
     if ("name" in msg) or ("Hi" in msg) or ("Hello" in msg) or ("你好" in msg) or ("Yo" in msg):
         line_bot_api.push_message(event.source.user_id, StickerSendMessage(
             package_id=11538, sticker_id=51626494))
