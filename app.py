@@ -91,7 +91,7 @@ def handle_message(event):
     elif ("dcard" in msg[0:5]):
         message = TextSendMessage(text=f"開始爬{msg[6:]}版！🥳")
         reply_message(event, message)
-        dcard_crawl(msg[6:])
+        dcard_crawl(event, msg[6:])
 
 
     elif ("測試" in msg):
@@ -151,7 +151,7 @@ def push_message(event, text):
         text)
 
 
-def dcard_crawl(board):
+def dcard_crawl(event, board):
     print(board)
     p = requests.Session()
     url = requests.get(f"https://www.dcard.tw/f/{board}")
