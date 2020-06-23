@@ -92,6 +92,11 @@ def handle_message(event):
         message = TextSendMessage(text=f"開始爬{msg[5:]}版！🥳")
         reply_message(event, message)
         dcard_crawl(event, msg[5:])
+    
+    elif ("test" in msg):
+        push_message(event,ImageSendMessage(
+            original_content_url='https://megapx-assets.dcard.tw/images/562686fd-9903-413c-b125-a704c3e489b5/640.webp',
+            preview_image_url='https://megapx-assets.dcard.tw/images/562686fd-9903-413c-b125-a704c3e489b5/640.webp'))
 
 
     elif ("測試" in msg):
@@ -189,13 +194,9 @@ def dcard_crawl(event, b):
                 num += 1
                 print(f"Picture {num} :", j["src"])
                 pic = j['src']
-                if pic[-3:] == 'jpg':
+                if pic[-3:] != 'png':
+                    pic = pic.replace('webp','jpeg')
                     push_message(event,ImageSendMessage(original_content_url=pic,preview_image_url=pic))
-            # pic = j['src'].replace(".webp","")
-            # img = requests.get(pic).content
-            # pic_out = open("output/"+str(num)+".jpg", 'wb')
-            # pic_out.write(img)
-            # pic_out.close()
 
 
 @handler.add(MessageEvent, message=StickerMessage)
