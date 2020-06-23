@@ -91,7 +91,7 @@ def handle_message(event):
     elif ("dcard" in msg[0:5]):
         message = TextSendMessage(text=f"開始爬{msg[6:]}版！🥳")
         reply_message(event, message)
-        dcard_crawl(msg[5:])
+        dcard_crawl(msg[6:])
 
 
     elif ("測試" in msg):
@@ -152,6 +152,7 @@ def push_message(event, text):
 
 
 def dcard_crawl(board):
+    print(board)
     p = requests.Session()
     url = requests.get(f"https://www.dcard.tw/f/{board}")
     soup = BeautifulSoup(url.text, "html.parser")
