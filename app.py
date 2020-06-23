@@ -153,6 +153,7 @@ def push_message(event, text):
 
 def dcard_crawl(event, b):
     board = b.replace(" ","")
+    print(board)
     p = requests.Session()
     url = requests.get(f"https://www.dcard.tw/f/{board}")
     soup = BeautifulSoup(url.text, "html.parser")
