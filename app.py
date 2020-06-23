@@ -189,7 +189,7 @@ def dcard_crawl(event, b):
                 print(f"Picture {num} :", j["src"])
                 pic = j['src']
                 if pic[-3:] == 'jpg':
-                push_message(event,ImageSendMessage(original_content_url=pic,preview_image_url=pic))
+                    push_message(event,ImageSendMessage(original_content_url=pic,preview_image_url=pic))
             else:
                 break
             # pic = j['src'].replace(".webp","")
