@@ -190,13 +190,15 @@ def dcard_crawl(event, b):
         soup = BeautifulSoup(url.text, "html.parser")
         sel_jpg = soup.find_all('img')
         for j in sel_jpg:
-            if('https' in j['src']) and num < 10:
+            if('https' in j['src']) and num < 20:
                 num += 1
                 print(f"Picture {num} :", j["src"])
                 pic = j['src']
-                if pic[-3:] != 'png':
+                if pic[-4:] == 'webp' or pic[-3:] == 'jpg':
                     pic = pic.replace('webp','jpeg')
                     push_message(event,ImageSendMessage(original_content_url=pic,preview_image_url=pic))
+                else:
+                    break
 
 
 @handler.add(MessageEvent, message=StickerMessage)
