@@ -1,3 +1,6 @@
+import requests
+from bs4 import BeautifulSoup
+import json
 from flask import Flask, request, abort
 
 from linebot import (
@@ -86,7 +89,7 @@ def handle_message(event):
         reply_message(event, buttons_template)
 
     elif ("dcard" in msg[0:5]):
-        message = TextSendMessage(text=f"開始爬{msg[5:]}版！🥳")
+        message = TextSendMessage(text=f"開始爬{msg[6:]}版！🥳")
         reply_message(event, message)
         dcard_crawl(msg[5:])
 
