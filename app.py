@@ -89,9 +89,9 @@ def handle_message(event):
         reply_message(event, buttons_template)
 
     elif ("dcard" in msg[0:5]):
-        message = TextSendMessage(text=f"開始爬{msg[6:]}版！🥳")
+        message = TextSendMessage(text=f"開始爬{msg[5:]}版！🥳")
         reply_message(event, message)
-        dcard_crawl(event, msg[6:])
+        dcard_crawl(event, msg[5:])
 
 
     elif ("測試" in msg):
@@ -151,8 +151,8 @@ def push_message(event, text):
         text)
 
 
-def dcard_crawl(event, board):
-    print(board)
+def dcard_crawl(event, b):
+    board = b.replace(" ","")
     p = requests.Session()
     url = requests.get(f"https://www.dcard.tw/f/{board}")
     soup = BeautifulSoup(url.text, "html.parser")
@@ -188,7 +188,7 @@ def dcard_crawl(event, board):
                 num += 1
                 print(f"Picture {num} :", j["src"])
                 pic = j['src']
-                if pic[-3:] == 'jpg'
+                if pic[-3:] == 'jpg':
                 push_message(event,ImageSendMessage(original_content_url=pic,preview_image_url=pic))
             else:
                 break
