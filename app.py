@@ -90,7 +90,7 @@ def handle_message(event):
 
     elif ("爬蟲" in msg):
         message = TextSendMessage(
-            text="可輸入dcard後接看板\nEx:dcard dressup\n範例看板:\n1.dressup(穿搭版)\n2.food(美食版)\n3.makeup(美妝版)\n4.pet(寵物版)\n.....")
+            text="可輸入dcard後接看板\n\nEx:dcard dressup\n\n範例看板:\n\n1.dressup(穿搭版)\n\n2.food(美食版)\n\n3.makeup(美妝版)\n\n4.pet(寵物版)\n\n.....")
         reply_message(event, message)
 
     elif ("dcard" in msg[0:5]):
