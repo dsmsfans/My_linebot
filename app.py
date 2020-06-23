@@ -183,12 +183,12 @@ def dcard_crawl(board):
         url = requests.get(url)
         soup = BeautifulSoup(url.text, "html.parser")
         sel_jpg = soup.find_all('img')
-    for j in sel_jpg:
-        if('https' in j['src']) and num < 10:
-            num += 1
-            print(f"Picture {num} :", j["src"])
-            pic = j['src']
-            push_message(event,ImageSendMessage(original_content_url=pic,preview_image_url=pic))
+        for j in sel_jpg:
+            if('https' in j['src']) and num < 10:
+                num += 1
+                print(f"Picture {num} :", j["src"])
+                pic = j['src']
+                push_message(event,ImageSendMessage(original_content_url=pic,preview_image_url=pic))
             # pic = j['src'].replace(".webp","")
             # img = requests.get(pic).content
             # pic_out = open("output/"+str(num)+".jpg", 'wb')
