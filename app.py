@@ -191,8 +191,6 @@ def dcard_crawl(event, b):
                 pic = j['src']
                 if pic[-3:] == 'jpg':
                     push_message(event,ImageSendMessage(original_content_url=pic,preview_image_url=pic))
-            else:
-                break
             # pic = j['src'].replace(".webp","")
             # img = requests.get(pic).content
             # pic_out = open("output/"+str(num)+".jpg", 'wb')
