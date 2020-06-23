@@ -50,7 +50,7 @@ def handle_message(event):
     # profile = line_bot_api.get_profile(event.source.user_id)
     # input_text = event.message.text.encode('utf-8')
     msg = event.message.text.lower()
-    if ("name" in msg) or ("Hi" in msg) or ("Hello" in msg) or ("你好" in msg) or ("Yo" in msg):
+    if ("name" in msg) or ("hi" in msg) or ("hello" in msg) or ("你好" in msg) or ("yo" in msg):
         line_bot_api.push_message(event.source.user_id, StickerSendMessage(
             package_id=11538, sticker_id=51626494))
         message = TextSendMessage(
@@ -191,7 +191,7 @@ def dcard_crawl(event, b):
         for j in sel_jpg:
             if('https' in j['src']) and num < 20:
                 num += 1
-                print(f"Picture {num} :", j["src"])
+                # print(f"Picture {num} :", j["src"])
                 pic = j['src']
                 if pic[-4:] == 'webp' or pic[-3:] == 'jpg':
                     pic = pic.replace('webp','jpeg')
