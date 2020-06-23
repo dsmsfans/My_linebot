@@ -88,16 +88,15 @@ def handle_message(event):
         )
         reply_message(event, buttons_template)
 
+    elif ("爬蟲" in msg):
+        message = TextSendMessage(
+            text="可輸入dcard後接看板\nEx:dcard dressup\n範例看板:\n1.dressup(穿搭版)\n2.food(美食版)\n3.makeup(美妝版)\n4.pet(寵物版)\n.....")
+        reply_message(event, message)
+
     elif ("dcard" in msg[0:5]):
         message = TextSendMessage(text=f"開始爬{msg[5:]}版！🥳")
         reply_message(event, message)
         dcard_crawl(event, msg[5:])
-    
-    elif ("test" in msg):
-        push_message(event,ImageSendMessage(
-            original_content_url='https://megapx-assets.dcard.tw/images/562686fd-9903-413c-b125-a704c3e489b5/640.webp',
-            preview_image_url='https://megapx-assets.dcard.tw/images/562686fd-9903-413c-b125-a704c3e489b5/640.webp'))
-
 
     elif ("測試" in msg):
         carousel_template = TemplateSendMessage(
