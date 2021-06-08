@@ -13,10 +13,15 @@ from linebot.models import *
 import os
 app = Flask(__name__)
 
+lineToken = ''
+lineSecret = ''
+
 # Channel Access Token
-line_bot_api = LineBotApi(os.environ['lineToken'])
+line_bot_api = LineBotApi(lineToken)
+# line_bot_api = LineBotApi(os.environ['lineToken'])
 # Channel Secret
-handler = WebhookHandler(os.environ['lineSecret'])
+handler = WebhookHandler(lineSecret)
+# handler = WebhookHandler(os.environ['lineSecret'])
 
 # 監聽所有來自 /callback 的 Post Request
 
@@ -41,6 +46,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    garbage_cnt = 0
     # print(event)
     """
     * event.message.text 是 使用者傳回來的對話
@@ -96,7 +102,7 @@ def handle_message(event):
     elif ("dcard" in msg[0:5]):
         message = TextSendMessage(text=f"開始爬{msg[5:]}版！🥳")
         reply_message(event, message)
-        dcard_crawl(event, msg[5:])
+        dcard_crawl(event, msg[5:].replace(' ', ''))
 
     elif ("測試" in msg):
         carousel_template = TemplateSendMessage(
@@ -106,6 +112,7 @@ def handle_message(event):
                     CarouselColumn(
                         thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg',
                         title='My Facebook',
+                        text='description1',
                         actions=[
                             URITemplateAction(
                                 label='Facebook',
@@ -116,6 +123,7 @@ def handle_message(event):
                     CarouselColumn(
                         thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/5/58/Instagram-Icon.png',
                         title="My Instagram",
+                        text='description1',
                         actions=[
                             URITemplateAction(
                                 label="Instagram",
@@ -126,6 +134,7 @@ def handle_message(event):
                     CarouselColumn(
                         thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg',
                         title="My Github",
+                        text='description1',
                         actions=[
                             URITemplateAction(
                                 label="Github",
@@ -155,17 +164,45 @@ def push_message(event, text):
         text)
 
 
-def dcard_crawl(event, b):
-    board = b.replace(" ","")
-    print(board)
+def fetch_picture(event, a):
+    num = 0
+    stop_crawling = False
+    for url_index, i in enumerate(a):
+        if url_index > 1:  # 去除置頂文章
+            url = "https://www.dcard.tw"+i
+            print(f"Page {url_index}'s URL: {url}")
+            url = requests.get(url)
+            soup = BeautifulSoup(url.text, "html.parser")
+            soup.select('picture')
+            sel_jpg = soup.find_all('img')
+
+            for j in sel_jpg:
+                if('https' in j['src'] and 'assets' not in j['src'] and 'scorecardresearch' not in j['src']):
+                    num += 1
+                    if num > 30:
+                        stop_crawling = True
+                        break
+                    else:
+                        print(f"Picture {num} :", j["src"])
+                        pic = j['src'].replace(".webp", "")
+                        push_message(event, ImageSendMessage(
+                            original_content_url=pic, preview_image_url=pic))
+            if stop_crawling:
+                break
+    print('Done')
+
+
+def dcard_crawl(event, board):
     p = requests.Session()
     url = requests.get(f"https://www.dcard.tw/f/{board}")
     soup = BeautifulSoup(url.text, "html.parser")
-    sel = soup.select("div.sc-1azsmde-0")
+    sel = soup.select("article")
     a = []
+    title = []
     for s in sel:
         a.append(s.find('a').get('href'))
-    url = "https://www.dcard.tw" + a[0]
+    url = "https://www.dcard.tw/f/" + a[0]
+
     for k in range(0, 10):
         post_data = {
             "before": a[-1][6 + len(board):15 + len(board)],
@@ -180,24 +217,7 @@ def dcard_crawl(event, b):
                 str(data2[u]["id"]) + "-" + \
                 str(data2[u]["title"].replace(" ", "-"))
             a.append(Temporary_url)
-    num = 0
-
-    for url_index, i in enumerate(a):
-        url = "https://www.dcard.tw"+i
-        print(f"Page {url_index}'s URL: {url}")
-        url = requests.get(url)
-        soup = BeautifulSoup(url.text, "html.parser")
-        sel_jpg = soup.find_all('img')
-        for j in sel_jpg:
-            if('https' in j['src']) and num < 20:
-                num += 1
-                # print(f"Picture {num} :", j["src"])
-                pic = j['src']
-                if pic[-4:] == 'webp' or pic[-3:] == 'jpg':
-                    pic = pic.replace('webp','jpeg')
-                    push_message(event,ImageSendMessage(original_content_url=pic,preview_image_url=pic))
-                else:
-                    break
+    fetch_picture(event, a)
 
 
 @handler.add(MessageEvent, message=StickerMessage)
