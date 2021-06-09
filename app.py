@@ -1,26 +1,30 @@
+from config import *
 import requests
 from bs4 import BeautifulSoup
 import json
 from flask import Flask, request, abort
 
-from linebot import (
-    LineBotApi, WebhookHandler
-)
-from linebot.exceptions import (
-    InvalidSignatureError, LineBotApiError
-)
+from linebot import LineBotApi, WebhookHandler
+from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import *
+
+from crawler import dcard_crawler, choose_crawltype
+
 import os
 app = Flask(__name__)
 
-lineToken = ''
-lineSecret = ''
+# global variable
+echo_flag = False
+crawl_enable = False
+board = ''
+temp_pic = []
 
 # Channel Access Token
-line_bot_api = LineBotApi(lineToken)
+line_bot_api = LineBotApi(dev_lineToken)
 # line_bot_api = LineBotApi(os.environ['lineToken'])
+
 # Channel Secret
-handler = WebhookHandler(lineSecret)
+handler = WebhookHandler(dev_lineSecret)
 # handler = WebhookHandler(os.environ['lineSecret'])
 
 # 監聽所有來自 /callback 的 Post Request
@@ -46,21 +50,23 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    garbage_cnt = 0
+    global echo_flag, crawl_enable, board, temp_pic
     # print(event)
     """
     * event.message.text 是 使用者傳回來的對話
     * TextSendMessage 則是把傳回來的對話改成可以reply or push 的格式
     * 建議讀者可以自行更改(text=event.message.text) 例如改成 (text="Hello World")
     """
-    # profile = line_bot_api.get_profile(event.source.user_id)
-    # input_text = event.message.text.encode('utf-8')
+
     msg = event.message.text.lower()
     if ("name" in msg) or ("hi" in msg) or ("hello" in msg) or ("你好" in msg) or ("yo" in msg):
-        line_bot_api.push_message(event.source.user_id, StickerSendMessage(
-            package_id=11538, sticker_id=51626494))
+        line_bot_api.push_message(
+            event.source.user_id,
+            StickerSendMessage(package_id=11538, sticker_id=51626494)
+        )
         message = TextSendMessage(
-            text="安安你好！\n\n我是Casper chat bot \n\n你想知道關於我什麼呢？")
+            text="安安你好！\n\n我是Casper chat bot \n\n你想知道關於我什麼呢？"
+        )
         reply_message(event, message)
     elif ("介紹" in msg) or ("關於我" in msg):
         message = TextSendMessage(
@@ -79,31 +85,27 @@ def handle_message(event):
             text="最擅長的程式語言是python\n\n其他的語言有C/C++\n\n大學學過一些Java HTML\n\n多益成績是850")
         reply_message(event, message)
     elif ("範例" in msg):
-        buttons_template = TemplateSendMessage(
-            alt_text='Buttons Template',
-            template=ButtonsTemplate(
-                title='這是範例問題',
-                text='選擇下列按鈕可以認識我',
-                thumbnail_image_url='https://vignette.wikia.nocookie.net/spongebobsquarepants/images/7/7f/Patrick_Star-1-.svg/revision/latest/top-crop/width/360/height/450?cb=20140617123710&path-prefix=zh',
-                actions=[
-                    MessageTemplateAction(label='學歷', text='學歷',),
-                    MessageTemplateAction(label='經歷', text='經歷'),
-                    MessageTemplateAction(label='介紹', text='介紹')
-                ]
-            )
-        )
-        reply_message(event, buttons_template)
-
+        choose_crawltype(event)
     elif ("爬蟲" in msg):
-        message = TextSendMessage(
-            text="可輸入dcard後接看板\n\nEx:dcard dressup\n\n範例看板:\n\n1.dressup(穿搭版)\n\n2.food(美食版)\n\n3.makeup(美妝版)\n\n4.pet(寵物版)\n\n.....")
+        push_text = (
+            "歡迎使用爬蟲功能\n \
+            請詳閱使用方法\n \
+            Ex: dcard (看板 ⚠請輸入英文):\n \
+            1.dcard dressup(穿搭版)\n \
+            2.dcard food(美食版)\n \
+            3.dcard makeup(美妝版)\n \
+            4.dcard pet(寵物版)\n.....").replace(' ', '')
+        message = TextSendMessage(text=push_text)
         reply_message(event, message)
-
     elif ("dcard" in msg[0:5]):
-        message = TextSendMessage(text=f"開始爬{msg[5:]}版！🥳")
+        board = msg[5:].replace(' ', '')
+        message = TextSendMessage(text=f"即將開始爬{board}版！")
         reply_message(event, message)
-        dcard_crawl(event, msg[5:].replace(' ', ''))
-
+        crawl_enable = choose_crawltype(event, board)
+    elif ("我全都要" in msg) and crawl_enable:
+        dcard_crawler(event, board)
+    elif ("我要一個一個選" in msg) and crawl_enable:
+        temp_pic = dcard_crawler(event, board, selected=True)
     elif ("測試" in msg):
         carousel_template = TemplateSendMessage(
             alt_text='Carousel Template',
@@ -114,9 +116,9 @@ def handle_message(event):
                         title='My Facebook',
                         text='description1',
                         actions=[
-                            URITemplateAction(
-                                label='Facebook',
-                                uri='https://www.facebook.com/profile.php?id=100001440018890',
+                            PostbackAction(
+                                label='message1',
+                                data=123
                             )
                         ]
                     ),
@@ -147,9 +149,27 @@ def handle_message(event):
         )
         reply_message(event, carousel_template)
 
-    else:
+    elif not echo_flag:
         message = TextSendMessage(text=msg)
         reply_message(event, message)
+
+
+@handler.add(PostbackEvent)
+def handle_postback(event):
+    get_parms = event.postback.data
+    eval(get_parms, locals=event)
+
+
+def show_pic(event, idx):
+    global temp_pic
+    for pic in temp_pic[idx]:
+        line_bot_api.push_message(event.source.user_id, ImageSendMessage(
+            original_content_url=pic, preview_image_url=pic))
+
+
+def stop_acho(enable=False):
+    global echo_flag
+    echo_flag = enable
 
 
 def reply_message(event, text):

@@ -3,3 +3,4 @@ ngrok
 config.py
 .vscode/settings.json
 ngrok.exe
+*.pyc
