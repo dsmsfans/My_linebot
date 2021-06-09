@@ -10,7 +10,10 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import *
 
-line_bot_api = LineBotApi(dev_lineToken)
+import os
+
+# line_bot_api = LineBotApi(dev_lineToken)
+line_bot_api = LineBotApi(os.environ['lineToken'])
 ua = UserAgent()
 
 

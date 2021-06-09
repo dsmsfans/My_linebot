@@ -20,12 +20,12 @@ board = ''
 temp_pic = []
 
 # Channel Access Token
-line_bot_api = LineBotApi(dev_lineToken)
-# line_bot_api = LineBotApi(os.environ['lineToken'])
+# line_bot_api = LineBotApi(dev_lineToken)
+line_bot_api = LineBotApi(os.environ['lineToken'])
 
 # Channel Secret
-handler = WebhookHandler(dev_lineSecret)
-# handler = WebhookHandler(os.environ['lineSecret'])
+# handler = WebhookHandler(dev_lineSecret)
+handler = WebhookHandler(os.environ['lineSecret'])
 
 # 監聽所有來自 /callback 的 Post Request
 
